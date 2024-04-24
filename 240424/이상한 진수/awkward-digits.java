@@ -1,28 +1,79 @@
 import java.util.*;
 import java.io.*;
+import java.lang.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String input_2 = br.readLine();
-        int[] arr = new int[input_2.length()];
-        int res = Integer.MIN_VALUE;
 
-        for(int i = 0; i < input_2.length(); i++){
-            char c = input_2.charAt(i);
-            if (c == '1') c = '0';
-            else if(c == '0') c = '1';
+        String ans = "";
+        String ans2 = "";
 
-            // 비트 반전시킨 이진수 문자열 binary 변수에 저장
-            String binary = input_2.substring(0, i) + c + input_2.substring(i+1); 
-            
-            // 2진수 → 10진수로 변환하여 배열에 저장
-            arr[i] = Integer.parseInt(binary, 2);
+        String a = br.readLine();
+        String b = br.readLine();
+
+        if(a.charAt(0)==0){
+            ans ="1"+a.substring(1);
+            System.out.print(Integer.parseInt(ans,2));
+            return;
+        }
+        if(b.charAt(0)==0){
+            ans2 ="1"+b.substring(1);
+            System.out.print(Integer.parseInt(ans,3));
+            return;
         }
 
-    // 배열에 저장된 10진수 값 중 최대값 찾아 출력
-        for(int i = 0; i < input_2.length(); i++)
-        res = Math.max(res, arr[i]);
-        System.out.print(res);
+        ArrayList<Integer> arr = new ArrayList<>();
+
+        for(int i=0;i<a.length();i++){
+            int ch = a.charAt(i);
+            if(ch=='0'){
+                ans = a.substring(0,i)+"1"+a.substring(i+1);
+                arr.add(Integer.parseInt(ans,2));
+            }
+            else{
+                ans = a.substring(0,i)+"0"+a.substring(i+1);
+                arr.add(Integer.parseInt(ans,2));
+            }
+        }
+        for(int j=0;j<b.length();j++){
+            int ch = b.charAt(j);
+            if(ch=='0'){
+                ans2 = b.substring(0,j)+"1"+b.substring(j+1);
+                if(arr.contains(Integer.parseInt(ans2,3))){
+                    System.out.println(Integer.parseInt(ans2,3));
+                    return;
+                }
+                ans2 = b.substring(0,j)+"2"+b.substring(j+1);
+                if(arr.contains(Integer.parseInt(ans2,3))){
+                    System.out.println(Integer.parseInt(ans2,3));
+                    return;
+                }
+            }
+            else if(ch=='1'){
+                ans2 = b.substring(0,j)+"0"+b.substring(j+1);
+                if(arr.contains(Integer.parseInt(ans2,3))){
+                    System.out.println(Integer.parseInt(ans2,3));
+                    return;
+                }
+                ans2 = b.substring(0,j)+"2"+b.substring(j+1);
+                if(arr.contains(Integer.parseInt(ans2,3))){
+                    System.out.println(Integer.parseInt(ans2,3));
+                    return;
+                }
+            }
+            else{
+                ans2 = b.substring(0,j)+"1"+b.substring(j+1);
+                if(arr.contains(Integer.parseInt(ans2,3))){
+                    System.out.println(Integer.parseInt(ans2,3));
+                    return;
+                }
+                ans2 = b.substring(0,j)+"0"+b.substring(j+1);
+                if(arr.contains(Integer.parseInt(ans2,3))){
+                    System.out.println(Integer.parseInt(ans2,3));
+                    return;
+                }
+            }
+        }
     }
 }
