@@ -5,7 +5,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String input_2 = br.readLine();
-        String input_3 = br.readLine();
         int[] arr = new int[input_2.length()];
         int res = Integer.MIN_VALUE;
 
